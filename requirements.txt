@@ -1,0 +1,3 @@
+# Test/dev dependencies for the SSI industrial-protocol project.
+# The protocol code itself uses only the Python standard library.
+pytest==9.1.1

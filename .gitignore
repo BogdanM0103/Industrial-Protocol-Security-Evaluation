@@ -1,0 +1,12 @@
+# Claude / assistant working files
+CLAUDE.md
+handover.md
+ROADMAP.md
+.claude/
+
+# Python virtual environment
+.venv/
+
+# Python bytecode cache
+__pycache__/
+*.pyc

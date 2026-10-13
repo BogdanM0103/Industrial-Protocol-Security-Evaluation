@@ -26,9 +26,12 @@ import enum
 import struct
 from dataclasses import dataclass
 
+PORT = 5020
+HOST = "127.0.0.1"
+
 class FunctionCode(enum.IntEnum):
-    READ = 1
-    WRITE = 2
+    READ = 0
+    WRITE = 1
 
 @dataclass
 class Message:

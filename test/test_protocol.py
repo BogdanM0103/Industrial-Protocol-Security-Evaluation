@@ -22,17 +22,17 @@ class TestProtocol(unittest.TestCase):
     def test_out_of_range_values(self):
         # test that out-of-range values raise an error
         with self.assertRaises(struct.error):
-            encode_message(Message(transaction_id=-1, function_code=FunctionCode.READ, register=-1, value=-1))  # transaction_id out of range
+            encode_message(Message(transaction_id=-1, function_code=FunctionCode.READ, register=-1, value=-1))  
         with self.assertRaises(struct.error):
-            encode_message(Message(transaction_id=70000, function_code=FunctionCode.READ, register=70000, value=70000))  # transaction_id out of range
+            encode_message(Message(transaction_id=70000, function_code=FunctionCode.READ, register=70000, value=70000))  
         with self.assertRaises(struct.error):
-            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=-1, value=-1))  # register out of range
+            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=-1, value=-1))
         with self.assertRaises(struct.error):
-            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=70000, value=70000))  # register out of range
+            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=70000, value=70000))
         with self.assertRaises(struct.error):
-            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=0, value=-1))  # value out of range
+            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=0, value=-1))
         with self.assertRaises(struct.error):
-            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=0, value=70000))  # value out of range
+            encode_message(Message(transaction_id=0, function_code=FunctionCode.READ, register=0, value=70000))
 
     def test_decoded_code_is_functioncode(self):
         # test that an invalid function code raises an error

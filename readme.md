@@ -46,3 +46,18 @@ Two defenses, each killing one weakness:
    - Crucial detail: the freshness token must be inside what the HMAC covers, so the attacker can't just swap in a fresh-looking timestamp — that would break the fingerprint.
 
 So the secured message = [the command] + [freshness token] + [HMAC over all of it]. MITM edits → HMAC fails. Replay → freshness fails. Both attacks now bounce off.
+
+
+<!-- 
+          127.0.0.1:5020
+   ┌──────────┐   TCP    ┌─────────────────────────────┐
+   │   HMI    │─────────▶│         PLC server          │
+   │ client   │◀─────────│                             │
+   └──────────┘  7-byte  │  registers: dict[int,int]   │
+                 frames  │  ┌───────────────────────┐  │
+                         │  │ accept → recv_exactly │  │
+                         │  │   → decode → handle   │  │
+                         │  │   → encode → sendall  │  │
+                         │  │   → loop              │  │
+                         │  └───────────────────────┘  │
+                         └─────────────────────────────┘ -->

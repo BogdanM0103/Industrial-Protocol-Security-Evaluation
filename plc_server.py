@@ -1,13 +1,5 @@
 import socket
-from protocol import (
-    Message,
-    FunctionCode,
-    HOST,
-    PORT,
-    SIZE,
-    encode_message,
-    decode_message,
-)
+from protocol import Message, FunctionCode, HOST, PORT, SIZE, recv_exactly, decode_message, encode_message
 
 class PLCServer:
     def __init__(self, register_count: int = 10):
@@ -21,14 +13,6 @@ class PLCServer:
                 return Message(msg.transaction_id, FunctionCode.WRITE, msg.register, msg.value)
             case _:
                 raise ValueError(f"Unknown function code {msg.function_code}")
-def recv_exactly(conn: socket.socket, n: int) -> bytearray:
-    buffer = bytearray()
-    while len(buffer) < n:
-        chunk = conn.recv(n - len(buffer))
-        if not chunk:
-            return buffer
-        buffer.extend(chunk)
-    return buffer
 
 def serve():
     plc = PLCServer()
@@ -56,7 +40,3 @@ def serve():
         print("\nPLC shutting down")
     finally:
         server.close()
-
-
-if __name__ == "__main__":
-    serve()

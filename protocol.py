@@ -24,8 +24,8 @@
 
 import enum
 import struct
+import socket
 from dataclasses import dataclass
-
 PORT = 5020
 HOST = "127.0.0.1"
 
@@ -50,6 +50,15 @@ def encode_message(message: Message) -> bytes:
 def decode_message(data: bytes) -> Message:
     transaction_id, function_code, register, value = struct.unpack(FORMAT, data)
     return Message(transaction_id, FunctionCode(function_code), register, value)
+
+def recv_exactly(conn: socket.socket, n: int) -> bytearray:
+    buffer = bytearray()
+    while len(buffer) < n:
+        chunk = conn.recv(n - len(buffer))
+        if not chunk:
+            return buffer
+        buffer.extend(chunk)
+    return buffer
 
 if __name__ == "__main__":
     # Example usage

@@ -40,3 +40,6 @@ def serve():
         print("\nPLC shutting down")
     finally:
         server.close()
+
+if __name__ == "__main__":
+    serve()
